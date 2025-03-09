@@ -3,6 +3,7 @@ package com.example.tarea3.Config;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -11,6 +12,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -21,18 +24,29 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
-                .csrf(csrf -> csrf.disable()) // Desactivar CSRF (para pruebas, activarlo en prod)
+                .csrf(csrf -> csrf.disable()) // Desactivar CSRF (para API REST)
                 .authorizeHttpRequests(auth -> auth
+                        // Recursos estáticos
                         .requestMatchers("/css/**", "/js/**", "/images/**", "/webjars/**").permitAll()
+                        // Rutas públicas
                         .requestMatchers("/registro", "/usuarios/registro", "/usuarios/registrar").permitAll()
-                        .requestMatchers("/admin/**").hasAuthority("ROLE_ADMIN") // Solo Admin accede a /admin
-                        .requestMatchers("/perfil/**").authenticated() // Cualquier usuario autenticado
-                        .anyRequest().authenticated() // Resto necesita autenticación
+                        
+                        // Permitir registro por API REST
+                        .requestMatchers(HttpMethod.POST, "/api/auth/register").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/auth/status").permitAll()
+                        
+                        // Rutas protegidas por rol
+                        .requestMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
+                        .requestMatchers("/api/usuarios").hasAuthority("ROLE_ADMIN")
+                        .requestMatchers("/perfil/**").authenticated()
+                        
+                        // Resto de rutas requieren autenticación
+                        .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
-                        .loginPage("/login") // Página de login
+                        .loginPage("/login")
                         .permitAll()
-                        .defaultSuccessUrl("/home", true) // Siempre redirige a /home tras login
+                        .defaultSuccessUrl("/home", true)
                         .failureUrl("/login?error=true")
                 )
                 .logout(logout -> logout
@@ -46,5 +60,10 @@ public class SecurityConfig {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+    
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
+        return authConfig.getAuthenticationManager();
     }
 }

@@ -5,7 +5,6 @@ import com.example.tarea3.Repositories.UsuarioRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UsuarioService {
@@ -24,6 +23,11 @@ public class UsuarioService {
     // Obtener usuario por ID
     public Usuario obtenerPorId(Long id) {
         return usuarioRepository.findById(id).orElse(null);  // Devuelve null si no existe
+    }
+    
+    // Obtener usuario por nombre
+    public Usuario obtenerPorNombre(String nombre) {
+        return usuarioRepository.findByNombre(nombre).orElse(null);
     }
 
     // Guardar o actualizar usuario
