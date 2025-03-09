@@ -1,6 +1,5 @@
 package com.example.tarea3.Models;
 
-import com.example.tarea3.Models.Usuario;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
