@@ -3,26 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio | Mi Aplicación</title>
+    <title>Perfil | Sistema de Artículos Científicos</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        body {
-            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        html, body {
+            height: 100%;
+            min-height: 100%;
+            margin: 0;
+            padding: 0;
         }
+        
+        body {
+            background-image: url('/images/Ciencia.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            position: relative;
+        }
+        
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(245, 245, 245, 0.7);
+            z-index: -1;
+        }
+        
         .container {
             max-width: 500px;
+            position: relative;
         }
+        
         .card {
             border-radius: 15px;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
             padding: 30px;
             background: white;
             text-align: center;
+            border-left: 5px solid #B0FC38;
         }
+        
         .btn-custom {
             width: 100%;
             padding: 12px;
@@ -30,29 +55,92 @@
             border-radius: 10px;
             transition: 0.3s;
         }
+        
         .btn-custom:hover {
             transform: scale(1.05);
         }
+        
+        .btn-primary {
+            background-color: #B0FC38;
+            border-color: #B0FC38;
+            color: #333;
+        }
+        
+        .btn-primary:hover {
+            background-color: #9de82c;
+            border-color: #9de82c;
+            color: #333;
+        }
+        
         .logout-btn {
             background-color: #dc3545;
             border: none;
         }
+        
         .logout-btn:hover {
             background-color: #c82333;
+        }
+        
+        h2 {
+            color: #333;
+            border-bottom: 2px solid #B0FC38;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .app-title {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+        }
+        
+        .app-title h1 {
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .app-title p {
+            font-style: italic;
+            color: #555;
+        }
+        
+        .user-avatar {
+            width: 80px;
+            height: 80px;
+            background-color: #B0FC38;
+            color: #333;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 2rem;
         }
     </style>
 </head>
 <body>
 
 <div class="container">
+    <div class="app-title">
+        <h1>Sistema de Búsqueda y Recomendación</h1>
+        <p>Artículos Científicos</p>
+    </div>
+    
     <div class="card">
-        <h2 class="mb-3">Bienvenido, <span th:text="${#authentication.name}"></span> 👋</h2>
-        <p class="text-muted">Aquí puedes editar tu perfil o cerrar sesión.</p>
+        <div class="user-avatar">
+            <i class="fas fa-user-graduate"></i>
+        </div>
+        <h2 class="mb-3">Bienvenido, <span th:text="${#authentication.name}"></span></h2>
+        <p class="text-muted">Perfil de investigador científico</p>
         
-        <a href="/perfil/editar" class="btn btn-primary btn-custom mb-2">✏️ Editar Perfil</a>
+        <a href="/perfil/editar" class="btn btn-primary btn-custom mb-2">
+            <i class="fas fa-user-edit me-2"></i> Editar Perfil
+        </a>
         
         <form th:action="@{/logout}" method="post">
-            <button type="submit" class="btn btn-custom logout-btn">🚪 Cerrar Sesión</button>
+            <button type="submit" class="btn btn-custom logout-btn">
+                <i class="fas fa-sign-out-alt me-2"></i> Cerrar Sesión
+            </button>
         </form>
     </div>
 </div>
