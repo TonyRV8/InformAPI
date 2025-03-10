@@ -1,5 +1,4 @@
-# Tarea 3
-# Sistema de Gestión de Usuarios - Spring Boot
+## InfromAPI - Spring Boot
 
 Este proyecto es una aplicación web desarrollada con Spring Boot que implementa un sistema de gestión de usuarios con autenticación, registro y control de acceso basado en roles. La aplicación permite a los usuarios registrarse, iniciar sesión, editar su perfil y, en el caso de administradores, gestionar a todos los usuarios del sistema.
 
