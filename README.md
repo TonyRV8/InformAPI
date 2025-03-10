@@ -9,7 +9,7 @@ Este proyecto es una aplicación web desarrollada con Spring Boot que implementa
 - Perfiles de usuario y administrador
   **Por defecto se tiene de administrador
      usuario: Antonio
-     contraseña: 123456**
+     contraseña: 12345**
 - Gestión completa de usuarios (CRUD) para administradores
 - Interfaz de usuario responsive con Bootstrap y Thymeleaf
 - Persistencia de datos con PostgreSQL
