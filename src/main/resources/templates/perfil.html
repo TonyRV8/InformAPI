@@ -54,6 +54,7 @@
             font-size: 1.1rem;
             border-radius: 10px;
             transition: 0.3s;
+            margin-bottom: 12px;
         }
         
         .btn-custom:hover {
@@ -70,6 +71,18 @@
             background-color: #9de82c;
             border-color: #9de82c;
             color: #333;
+        }
+        
+        .btn-info {
+            background-color: #17a2b8;
+            border-color: #17a2b8;
+            color: white;
+        }
+        
+        .btn-info:hover {
+            background-color: #138496;
+            border-color: #138496;
+            color: white;
         }
         
         .logout-btn {
@@ -120,12 +133,35 @@
 </head>
 <body>
 
-<div class="container">
-    <div class="app-title">
-        <h1>Sistema de Búsqueda y Recomendación</h1>
-        <p>Artículos Científicos</p>
+<!-- Barra de navegación -->
+<nav class="navbar navbar-expand-lg shadow-sm sticky-top mb-4">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/perfil">
+            <i class="fas fa-flask me-2"></i>
+            InformAPI
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/search">Búsqueda</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/perfil/editar">Mi Perfil</a>
+                </li>
+                <li class="nav-item">
+                    <form th:action="@{/logout}" method="post" class="d-inline">
+                        <button type="submit" class="nav-link border-0 bg-transparent">Cerrar Sesión</button>
+                    </form>
+                </li>
+            </ul>
+        </div>
     </div>
-    
+</nav>
+
+<div class="container">
     <div class="card">
         <div class="user-avatar">
             <i class="fas fa-user-graduate"></i>
@@ -133,8 +169,12 @@
         <h2 class="mb-3">Bienvenido, <span th:text="${#authentication.name}"></span></h2>
         <p class="text-muted">Perfil de investigador científico</p>
         
-        <a href="/perfil/editar" class="btn btn-primary btn-custom mb-2">
+        <a href="/perfil/editar" class="btn btn-primary btn-custom">
             <i class="fas fa-user-edit me-2"></i> Editar Perfil
+        </a>
+        
+        <a href="/search" class="btn btn-info btn-custom">
+            <i class="fas fa-search me-2"></i> Buscar Artículos
         </a>
         
         <form th:action="@{/logout}" method="post">

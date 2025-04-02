@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel de Administración</title>
+    <title>Búsqueda de Artículos | Sistema de Artículos Científicos</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
@@ -35,32 +35,23 @@
         }
         
         .container {
-            max-width: 600px;
+            max-width: 800px;
             margin-top: 50px;
             position: relative;
         }
         
         .card {
             border-radius: 15px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
             padding: 30px;
-            text-align: center;
-            background-color: rgba(255, 255, 255, 0.9);
+            background: white;
             border-left: 5px solid #B0FC38;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
         
-        .btn-custom {
-            width: 100%;
-            margin-bottom: 15px;
-            font-size: 1.1em;
-            padding: 12px;
-            border-radius: 8px;
-            transition: all 0.3s;
-        }
-        
-        .btn-custom:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        .search-box {
+            padding: 30px;
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.9);
         }
         
         .btn-primary {
@@ -75,55 +66,41 @@
             color: #333;
         }
         
-        .btn-info {
-            background-color: #17a2b8;
-            border-color: #17a2b8;
-            color: white;
-        }
-        
-        .btn-info:hover {
-            background-color: #138496;
-            border-color: #138496;
-        }
-        
-        .btn-secondary {
-            background-color: #6c757d;
-            border-color: #6c757d;
-        }
-        
-        .btn-secondary:hover {
-            background-color: #5a6268;
-            border-color: #545b62;
-        }
-        
-        .btn-danger {
-            background-color: #dc3545;
-            border-color: #dc3545;
-        }
-        
-        .btn-danger:hover {
-            background-color: #c82333;
-            border-color: #bd2130;
+        .form-control:focus {
+            border-color: #B0FC38;
+            box-shadow: 0 0 0 0.25rem rgba(176, 252, 56, 0.25);
         }
         
         h2 {
             color: #333;
             border-bottom: 2px solid #B0FC38;
             padding-bottom: 10px;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
         
-        .admin-badge {
-            background-color: #B0FC38;
+        .search-tips {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+        }
+        
+        .search-tips h5 {
             color: #333;
-            padding: 3px 10px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            margin-left: 8px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
         }
         
-        .feature-icon {
-            margin-right: 10px;
+        .advanced-link {
+            display: block;
+            text-align: right;
+            margin-top: 10px;
+            color: #6c757d;
+        }
+        
+        .advanced-link:hover {
+            color: #B0FC38;
         }
         
         .navbar {
@@ -149,9 +126,9 @@
 <body>
 
 <!-- Barra de navegación -->
-<nav class="navbar navbar-expand-lg shadow-sm sticky-top mb-4">
+<nav class="navbar navbar-expand-lg shadow-sm sticky-top">
     <div class="container-fluid">
-        <a class="navbar-brand" href="/admin">
+        <a class="navbar-brand" href="/home">
             <i class="fas fa-flask me-2"></i>
             InformAPI
         </a>
@@ -161,13 +138,13 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="/admin/usuarios">Usuarios</a>
+                    <a class="nav-link" href="/home">Inicio</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/search">Búsqueda</a>
+                    <a class="nav-link active" href="/search">Búsqueda</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/perfil/editar">Mi Perfil</a>
+                    <a class="nav-link" href="/perfil">Mi Perfil</a>
                 </li>
                 <li class="nav-item">
                     <form th:action="@{/logout}" method="post" class="d-inline">
@@ -180,30 +157,39 @@
 </nav>
 
 <div class="container">
-    <div class="card shadow">
-        <h2 class="mb-4">Panel de Administración <span class="admin-badge">ADMIN</span></h2>
+    <div class="card">
+        <h2 class="text-center mb-4">
+            <i class="fas fa-search me-2"></i>
+            Búsqueda de Artículos Científicos
+        </h2>
         
-        <!-- Ver todos los usuarios -->
-        <a href="/admin/usuarios" class="btn btn-primary btn-custom">
-            <i class="fas fa-users feature-icon"></i>Gestionar Usuarios
-        </a>
-        
-        <!-- Búsqueda de artículos -->
-        <a href="/search" class="btn btn-info btn-custom">
-            <i class="fas fa-search feature-icon"></i>Buscar Artículos Científicos
-        </a>
-        
-        <!-- Editar perfil -->
-        <a href="/perfil/editar" class="btn btn-secondary btn-custom">
-            <i class="fas fa-user-edit feature-icon"></i>Editar Mi Perfil
-        </a>
-
-        <!-- Cerrar sesión -->
-        <form th:action="@{/logout}" method="post">
-            <button type="submit" class="btn btn-danger btn-custom">
-                <i class="fas fa-sign-out-alt feature-icon"></i>Cerrar Sesión
-            </button>
+        <form th:action="@{/search/results}" method="get">
+            <div class="input-group mb-3">
+                <input type="text" name="query" class="form-control form-control-lg" 
+                       placeholder="Ingresa tu búsqueda (ej: inteligencia artificial, machine learning...)" required>
+                <button class="btn btn-primary" type="submit">
+                    <i class="fas fa-search me-2"></i>Buscar
+                </button>
+            </div>
+            
+            <a href="/search/advanced" class="advanced-link">
+                <i class="fas fa-sliders-h me-1"></i>Búsqueda avanzada
+            </a>
         </form>
+        
+        <div class="search-tips mt-4">
+            <h5>
+                <i class="fas fa-lightbulb me-2"></i>
+                Consejos de búsqueda
+            </h5>
+            <ul>
+                <li>Utiliza <strong>AND</strong> para combinar términos: <code>machine learning AND healthcare</code></li>
+                <li>Utiliza <strong>OR</strong> para buscar alternativas: <code>artificial intelligence OR AI</code></li>
+                <li>Utiliza <strong>NOT</strong> para excluir términos: <code>climate change NOT politics</code></li>
+                <li>Utiliza comillas para buscar frases exactas: <code>"deep learning"</code></li>
+                <li>Utiliza <strong>TITLE-ABS-KEY</strong> para buscar en título, resumen y palabras clave: <code>TITLE-ABS-KEY(machine learning)</code></li>
+            </ul>
+        </div>
     </div>
 </div>
 

@@ -12,8 +12,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -39,6 +37,8 @@ public class SecurityConfig {
                         .requestMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
                         .requestMatchers("/api/usuarios").hasAuthority("ROLE_ADMIN")
                         .requestMatchers("/perfil/**").authenticated()
+                        .requestMatchers("/search/**").authenticated()
+
                         
                         // Resto de rutas requieren autenticación
                         .anyRequest().authenticated()
