@@ -1,9 +1,5 @@
 package com.example.tarea3.Controllers;
 
-import com.example.tarea3.Models.Usuario;
-import com.example.tarea3.Repositories.UsuarioRepository;
-import com.example.tarea3.Services.UserDetailsServiceImpl;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -15,6 +11,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.example.tarea3.Models.Usuario;
+import com.example.tarea3.Repositories.UsuarioRepository;
+import com.example.tarea3.Services.UserDetailsServiceImpl;
 
 @Controller
 public class PerfilController {
@@ -48,6 +49,7 @@ public class PerfilController {
             Authentication authentication,
             @RequestParam String nombre,
             @RequestParam String email,
+            @RequestParam(required = false) Boolean darkMode,
             @RequestParam(required = false) String password) {
 
         // Obtener usuario actual
@@ -62,6 +64,7 @@ public class PerfilController {
         // Actualizar datos del usuario
         usuario.setNombre(nombre);
         usuario.setEmail(email);
+        usuario.setDarkMode(darkMode != null ? darkMode : false);
 
         // Si el usuario ingresó una nueva contraseña, encriptarla y actualizarla
         if (password != null && !password.isEmpty()) {
@@ -85,5 +88,39 @@ public class PerfilController {
         }
 
         return "redirect:/home?success=true";
+    }
+    
+    @PostMapping("/perfil/toggle-dark-mode")
+    @ResponseBody
+    public String toggleDarkMode(Authentication authentication, @RequestParam boolean darkMode) {
+        // Obtener usuario actual
+        String currentUsername = authentication.getName();
+        Usuario usuario = usuarioRepository.findByNombre(currentUsername)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+                
+        // Actualizar la preferencia de tema
+        usuario.setDarkMode(darkMode);
+        usuarioRepository.save(usuario);
+        
+        return "{\"success\": true, \"darkMode\": " + darkMode + "}";
+    }
+    
+    @GetMapping("/perfil/check-dark-mode")
+    @ResponseBody
+    public String checkDarkMode(Authentication authentication) {
+        if (authentication == null) {
+            return "{\"darkMode\": false}";
+        }
+        
+        // Obtener usuario actual
+        try {
+            String currentUsername = authentication.getName();
+            Usuario usuario = usuarioRepository.findByNombre(currentUsername)
+                    .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+                    
+            return "{\"darkMode\": " + (usuario.getDarkMode() != null ? usuario.getDarkMode() : false) + "}";
+        } catch (Exception e) {
+            return "{\"darkMode\": false}";
+        }
     }
 }

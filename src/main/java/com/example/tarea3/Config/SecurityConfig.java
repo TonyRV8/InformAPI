@@ -1,6 +1,5 @@
 package com.example.tarea3.Config;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -12,6 +11,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+
+import lombok.RequiredArgsConstructor;
 
 @Configuration
 @EnableWebSecurity
@@ -22,7 +24,11 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
-                .csrf(csrf -> csrf.disable()) // Desactivar CSRF (para API REST)
+                // Habilitar CSRF con excepciones para las API REST
+                .csrf(csrf -> csrf
+                    .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+                    .ignoringRequestMatchers("/api/**")
+                )
                 .authorizeHttpRequests(auth -> auth
                         // Recursos estáticos
                         .requestMatchers("/css/**", "/js/**", "/images/**", "/webjars/**").permitAll()
@@ -33,12 +39,15 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/api/auth/register").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/auth/status").permitAll()
                         
+                        // Endpoints para el modo oscuro (accesibles para usuarios autenticados)
+                        .requestMatchers("/perfil/check-dark-mode").permitAll()
+                        .requestMatchers("/perfil/toggle-dark-mode").authenticated()
+                        
                         // Rutas protegidas por rol
                         .requestMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
                         .requestMatchers("/api/usuarios").hasAuthority("ROLE_ADMIN")
                         .requestMatchers("/perfil/**").authenticated()
                         .requestMatchers("/search/**").authenticated()
-
                         
                         // Resto de rutas requieren autenticación
                         .anyRequest().authenticated()

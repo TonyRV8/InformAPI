@@ -6,6 +6,12 @@
     <title>Perfil | Sistema de Artículos Científicos</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" th:href="@{/css/dark-mode.css}">
+    
+    <!-- CSRF Token para peticiones AJAX -->
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+    
     <style>
         html, body {
             height: 100%;
@@ -30,7 +36,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(245, 245, 245, 0.7);
+            background-color: var(--background-color);
             z-index: -1;
         }
         
@@ -43,9 +49,9 @@
             border-radius: 15px;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
             padding: 30px;
-            background: white;
+            background: var(--card-bg);
             text-align: center;
-            border-left: 5px solid #B0FC38;
+            border-left: 5px solid var(--primary-color);
         }
         
         .btn-custom {
@@ -62,15 +68,15 @@
         }
         
         .btn-primary {
-            background-color: #B0FC38;
-            border-color: #B0FC38;
-            color: #333;
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: var(--text-color);
         }
         
         .btn-primary:hover {
-            background-color: #9de82c;
-            border-color: #9de82c;
-            color: #333;
+            background-color: var(--primary-hover-color);
+            border-color: var(--primary-hover-color);
+            color: var(--text-color);
         }
         
         .btn-info {
@@ -88,6 +94,7 @@
         .logout-btn {
             background-color: #dc3545;
             border: none;
+            color: white;
         }
         
         .logout-btn:hover {
@@ -95,8 +102,8 @@
         }
         
         h2 {
-            color: #333;
-            border-bottom: 2px solid #B0FC38;
+            color: var(--text-color);
+            border-bottom: 2px solid var(--primary-color);
             padding-bottom: 10px;
             margin-bottom: 20px;
         }
@@ -104,7 +111,7 @@
         .app-title {
             text-align: center;
             margin-bottom: 30px;
-            color: #333;
+            color: var(--text-color);
         }
         
         .app-title h1 {
@@ -114,20 +121,29 @@
         
         .app-title p {
             font-style: italic;
-            color: #555;
+            color: var(--text-color);
         }
         
         .user-avatar {
             width: 80px;
             height: 80px;
-            background-color: #B0FC38;
-            color: #333;
+            background-color: var(--primary-color);
+            color: var(--text-color);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 20px;
             font-size: 2rem;
+        }
+        
+        .navbar {
+            background-color: var(--navbar-bg);
+            border-bottom: 2px solid var(--primary-color);
+        }
+        
+        .navbar-brand, .navbar-nav .nav-link {
+            color: var(--text-color);
         }
     </style>
 </head>
@@ -186,5 +202,6 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/js/dark-mode.js"></script>
 </body>
 </html>

@@ -1,4 +1,4 @@
--- Crear la tabla de usuarios
+-- Crear la tabla de usuarios si no existe
 CREATE TABLE IF NOT EXISTS usuarios (
     id BIGSERIAL PRIMARY KEY,
     nombre VARCHAR(64) NOT NULL,
@@ -6,7 +6,10 @@ CREATE TABLE IF NOT EXISTS usuarios (
     password VARCHAR(128) NOT NULL
 );
 
--- Crear la tabla de roles
+-- Agregar columna dark_mode si no existe (versión compatible con Spring Boot)
+ALTER TABLE usuarios ADD COLUMN IF NOT EXISTS dark_mode BOOLEAN DEFAULT FALSE;
+
+-- Crear la tabla de roles si no existe
 CREATE TABLE IF NOT EXISTS roles (
     id BIGSERIAL PRIMARY KEY,
     nombre VARCHAR(64) NOT NULL UNIQUE
@@ -31,8 +34,8 @@ SELECT 'ROLE_USER'
 WHERE NOT EXISTS (SELECT 1 FROM roles WHERE nombre = 'ROLE_USER');
 
 -- Insertar el usuario admin (solo si no existe)
-INSERT INTO usuarios (nombre, email, password)
-SELECT 'Antonio', 'antonio@gmail.com', '$2a$12$9Sars17nXq0UYeX8qh54lO8MKi964ejmWefdi/9x4flwOcHPAS4.e'
+INSERT INTO usuarios (nombre, email, password, dark_mode)
+SELECT 'Antonio', 'antonio@gmail.com', '$2a$12$9Sars17nXq0UYeX8qh54lO8MKi964ejmWefdi/9x4flwOcHPAS4.e', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM usuarios WHERE email = 'antonio@gmail.com');
 
 -- Asignar el rol ADMIN al usuario Antonio (solo si no tiene ya ese rol)

@@ -5,7 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Perfil</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
+        :root {
+            --primary-color: #B0FC38;
+            --primary-hover-color: #9de82c;
+            --background-color: rgba(245, 245, 245, 0.7);
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --text-color: #333;
+            --secondary-color: #6c757d;
+            --secondary-hover-color: #5a6268;
+        }
+        
+        [data-theme="dark"] {
+            --primary-color: #6b9621;
+            --primary-hover-color: #5a7e1a;
+            --background-color: rgba(33, 37, 41, 0.8);
+            --card-bg: rgba(52, 58, 64, 0.95);
+            --text-color: #f8f9fa;
+            --secondary-color: #adb5bd;
+            --secondary-hover-color: #ced4da;
+        }
+        
         html, body {
             height: 100%;
             min-height: 100%;
@@ -20,6 +41,7 @@
             background-repeat: no-repeat;
             background-attachment: fixed;
             position: relative;
+            color: var(--text-color);
         }
         
         body::before {
@@ -29,7 +51,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(245, 245, 245, 0.7);
+            background-color: var(--background-color);
             z-index: -1;
         }
         
@@ -41,42 +63,66 @@
         .card {
             border-radius: 15px;
             padding: 30px;
-            background-color: rgba(255, 255, 255, 0.9);
-            border-left: 5px solid #B0FC38;
+            background-color: var(--card-bg);
+            border-left: 5px solid var(--primary-color);
         }
         
         h3 {
-            color: #333;
-            border-bottom: 2px solid #B0FC38;
+            color: var(--text-color);
+            border-bottom: 2px solid var(--primary-color);
             padding-bottom: 10px;
             margin-bottom: 20px;
         }
         
         .btn-primary {
-            background-color: #B0FC38;
-            border-color: #B0FC38;
-            color: #333;
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: var(--text-color);
         }
         
         .btn-primary:hover {
-            background-color: #9de82c;
-            border-color: #9de82c;
-            color: #333;
+            background-color: var(--primary-hover-color);
+            border-color: var(--primary-hover-color);
+            color: var(--text-color);
         }
         
         .btn-secondary {
-            background-color: #6c757d;
-            border-color: #6c757d;
+            background-color: var(--secondary-color);
+            border-color: var(--secondary-color);
+            color: var(--card-bg);
         }
         
         .btn-secondary:hover {
-            background-color: #5a6268;
-            border-color: #545b62;
+            background-color: var(--secondary-hover-color);
+            border-color: var(--secondary-hover-color);
         }
         
         .form-control:focus {
-            border-color: #B0FC38;
+            border-color: var(--primary-color);
             box-shadow: 0 0 0 0.25rem rgba(176, 252, 56, 0.25);
+        }
+
+        /* Estilos para el toggle de modo oscuro */
+        .form-switch .form-check-input:checked {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        
+        .form-switch .form-check-input:focus {
+            box-shadow: 0 0 0 0.25rem rgba(176, 252, 56, 0.25);
+        }
+        
+        .form-check-label {
+            color: var(--text-color);
+        }
+        
+        .form-control, .form-control:focus {
+            background-color: var(--card-bg);
+            color: var(--text-color);
+        }
+        
+        .form-label {
+            color: var(--text-color);
         }
     </style>
 </head>
@@ -98,6 +144,13 @@
                 <label class="form-label">Nueva Contraseña</label>
                 <input type="password" class="form-control" name="password">
             </div>
+            
+            <!-- Switch para activar el modo oscuro -->
+            <div class="mb-3 form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="darkModeSwitch" name="darkMode" th:checked="${usuario.darkMode}">
+                <label class="form-check-label" for="darkModeSwitch">Modo oscuro</label>
+            </div>
+            
             <button type="submit" class="btn btn-primary w-100">Guardar Cambios</button>
         </form>
         
@@ -106,5 +159,44 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Lógica para aplicar el modo oscuro
+    document.addEventListener('DOMContentLoaded', function() {
+        const darkModeSwitch = document.getElementById('darkModeSwitch');
+        
+        // Aplica el tema actual al cargar la página
+        if (darkModeSwitch.checked) {
+            document.documentElement.setAttribute('data-theme', 'dark');
+        } else {
+            document.documentElement.setAttribute('data-theme', 'light');
+        }
+        
+        // Maneja el cambio del switch
+        darkModeSwitch.addEventListener('change', function() {
+            if (this.checked) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                saveDarkModePreference(true);
+            } else {
+                document.documentElement.setAttribute('data-theme', 'light');
+                saveDarkModePreference(false);
+            }
+        });
+        
+        // Función para guardar la preferencia via AJAX
+        function saveDarkModePreference(isDarkMode) {
+            fetch('/perfil/toggle-dark-mode', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="_csrf"]')?.content || ''
+                },
+                body: `darkMode=${isDarkMode}`
+            })
+            .then(response => response.json())
+            .then(data => console.log('Preferencia de tema guardada:', data))
+            .catch(error => console.error('Error al guardar preferencia:', error));
+        }
+    });
+</script>
 </body>
 </html>

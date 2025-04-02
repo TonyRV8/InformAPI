@@ -5,12 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Usuario</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" th:href="@{/css/dark-mode.css}">
+    
+    <!-- CSRF Token para peticiones AJAX -->
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+    
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        primary: '#B0FC38',
+                        primary: {
+                            DEFAULT: 'var(--primary-color)',
+                            hover: 'var(--primary-hover-color)'
+                        },
                     }
                 }
             }
@@ -40,8 +50,43 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(245, 245, 245, 0.7);
+            background-color: var(--background-color);
             z-index: -1;
+        }
+        
+        /* Estilos personalizados para modo oscuro en Tailwind */
+        [data-theme="dark"] .bg-white {
+            background-color: var(--card-bg) !important;
+        }
+        
+        [data-theme="dark"] .text-gray-700,
+        [data-theme="dark"] .text-gray-800 {
+            color: var(--text-color) !important;
+        }
+        
+        [data-theme="dark"] .border {
+            border-color: var(--border-color) !important;
+        }
+        
+        [data-theme="dark"] .bg-gray-500 {
+            background-color: var(--secondary-color) !important;
+        }
+        
+        [data-theme="dark"] .hover\:bg-gray-700:hover {
+            background-color: var(--secondary-hover-color) !important;
+        }
+        
+        [data-theme="dark"] .focus\:border-primary:focus {
+            border-color: var(--primary-color) !important;
+        }
+        
+        [data-theme="dark"] .focus\:ring-primary:focus {
+            --tw-ring-color: var(--primary-color) !important;
+        }
+        
+        [data-theme="dark"] input {
+            background-color: var(--input-bg) !important;
+            color: var(--text-color) !important;
         }
     </style>
 </head>
@@ -73,5 +118,6 @@
         </div>
     </div>
 
+    <script src="/js/dark-mode.js"></script>
 </body>
 </html>

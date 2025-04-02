@@ -1,9 +1,18 @@
 package com.example.tarea3.Models;
 
-import jakarta.persistence.*;
-import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
 
 
 @Entity
@@ -23,6 +32,8 @@ public class Usuario {
     @Column(nullable = false)
     private String password;
     
+    @Column(name = "dark_mode")
+    private Boolean darkMode = false;
   
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
@@ -63,6 +74,14 @@ public class Usuario {
     
     public void setPassword(String password) {
         this.password = password;
+    }
+    
+    public Boolean getDarkMode() {
+        return darkMode;
+    }
+    
+    public void setDarkMode(Boolean darkMode) {
+        this.darkMode = darkMode;
     }
     
     public Set<Rol> getRoles() {

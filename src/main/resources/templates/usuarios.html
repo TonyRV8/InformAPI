@@ -6,15 +6,28 @@
     <title>Lista de Usuarios | Sistema de Artículos Científicos</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" th:href="@{/css/dark-mode.css}">
+    
+    <!-- CSRF Token para peticiones AJAX -->
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+    
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        primary: '#B0FC38',
+                        primary: {
+                            DEFAULT: 'var(--primary-color)',
+                            hover: 'var(--primary-hover-color)'
+                        },
+                        textColor: 'var(--text-color)',
+                        cardBg: 'var(--card-bg)',
+                        borderColor: 'var(--border-color)'
                     }
                 }
-            }
+            },
+            darkMode: 'class'
         }
     </script>
     <style>
@@ -41,8 +54,53 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(245, 245, 245, 0.7);
+            background-color: var(--background-color);
             z-index: -1;
+        }
+        
+        /* Estilos personalizados para modo oscuro en Tailwind */
+        [data-theme="dark"] .bg-white {
+            background-color: var(--card-bg) !important;
+        }
+        
+        [data-theme="dark"] .text-gray-800 {
+            color: var(--text-color) !important;
+        }
+        
+        [data-theme="dark"] .border {
+            border-color: var(--border-color) !important;
+        }
+        
+        [data-theme="dark"] .bg-gray-200 {
+            background-color: var(--table-header-bg) !important;
+        }
+        
+        [data-theme="dark"] .hover\:bg-gray-100:hover {
+            background-color: rgba(255, 255, 255, 0.05) !important;
+        }
+        
+        [data-theme="dark"] .bg-red-500 {
+            background-color: #dc3545 !important;
+        }
+        
+        [data-theme="dark"] .hover\:bg-red-700:hover {
+            background-color: #bd2130 !important;
+        }
+        
+        [data-theme="dark"] .bg-gray-500 {
+            background-color: var(--secondary-color) !important;
+        }
+        
+        [data-theme="dark"] .hover\:bg-gray-700:hover {
+            background-color: var(--secondary-hover-color) !important;
+        }
+        
+        [data-theme="dark"] .text-white {
+            color: var(--text-color) !important;
+        }
+        
+        [data-theme="dark"] .shadow-lg {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.2) !important;
         }
     </style>
 </head>
@@ -57,17 +115,17 @@
         <table class="w-full border-collapse border border-gray-300 rounded-lg shadow">
             <thead>
                 <tr class="bg-gray-200">
-                    <th class="border p-2">ID</th>
-                    <th class="border p-2">Nombre</th>
-                    <th class="border p-2">Email</th>
-                    <th class="border p-2">Acciones</th>
+                    <th class="border p-2 text-gray-800">ID</th>
+                    <th class="border p-2 text-gray-800">Nombre</th>
+                    <th class="border p-2 text-gray-800">Email</th>
+                    <th class="border p-2 text-gray-800">Acciones</th>
                 </tr>
             </thead>
             <tbody>
                 <tr th:each="usuario : ${usuarios}" class="text-center hover:bg-gray-100">
-                    <td class="border p-2" th:text="${usuario.id}"></td>
-                    <td class="border p-2" th:text="${usuario.nombre}"></td>
-                    <td class="border p-2" th:text="${usuario.email}"></td>
+                    <td class="border p-2 text-gray-800" th:text="${usuario.id}"></td>
+                    <td class="border p-2 text-gray-800" th:text="${usuario.nombre}"></td>
+                    <td class="border p-2 text-gray-800" th:text="${usuario.email}"></td>
                     <td class="border p-2 flex justify-center space-x-2">
                         <a th:href="@{'/admin/usuarios/editar/' + ${usuario.id}}"
                             class="bg-primary text-gray-800 px-3 py-1 rounded hover:bg-opacity-80 transition">
@@ -89,5 +147,7 @@
             </a>
         </div>
     </div>
+    
+    <script src="/js/dark-mode.js"></script>
 </body>
 </html>

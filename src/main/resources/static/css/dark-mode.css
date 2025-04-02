@@ -1,0 +1,131 @@
+/* src/main/resources/static/css/dark-mode.css */
+:root {
+    --primary-color: #B0FC38;
+    --primary-hover-color: #9de82c;
+    --background-color: rgba(245, 245, 245, 0.7);
+    --card-bg: rgba(255, 255, 255, 0.95);
+    --text-color: #333;
+    --secondary-color: #6c757d;
+    --secondary-hover-color: #5a6268;
+    --border-color: #e0e0e0;
+    --table-header-bg: #f8f9fa;
+    --navbar-bg: rgba(255, 255, 255, 0.9);
+    --alert-success-bg: #d4edda;
+    --alert-success-text: #155724;
+    --alert-danger-bg: #f8d7da;
+    --alert-danger-text: #721c24;
+    --input-bg: #fff;
+}
+
+[data-theme="dark"] {
+    --primary-color: #6b9621;
+    --primary-hover-color: #5a7e1a;
+    --background-color: rgba(33, 37, 41, 0.9);
+    --card-bg: rgba(52, 58, 64, 0.95);
+    --text-color: #f8f9fa;
+    --secondary-color: #adb5bd;
+    --secondary-hover-color: #ced4da;
+    --border-color: #495057;
+    --table-header-bg: #343a40;
+    --navbar-bg: rgba(33, 37, 41, 0.9);
+    --alert-success-bg: #204829;
+    --alert-success-text: #8fd19e;
+    --alert-danger-bg: #491217;
+    --alert-danger-text: #ea868f;
+    --input-bg: #343a40;
+}
+
+body {
+    color: var(--text-color);
+}
+
+body::before {
+    background-color: var(--background-color);
+}
+
+.card, .navbar, .alert, .search-box, .search-tips {
+    background-color: var(--card-bg);
+    color: var(--text-color);
+}
+
+.navbar {
+    background-color: var(--navbar-bg);
+    border-bottom-color: var(--primary-color);
+}
+
+.navbar-brand, .navbar-nav .nav-link {
+    color: var(--text-color);
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: var(--text-color);
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-hover-color);
+    border-color: var(--primary-hover-color);
+}
+
+.btn-secondary {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--text-color);
+    border-bottom-color: var(--primary-color);
+}
+
+.form-control, .form-select {
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    border-color: var(--border-color);
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: var(--primary-color);
+    background-color: var(--input-bg);
+    color: var(--text-color);
+}
+
+.form-label, .form-check-label {
+    color: var(--text-color);
+}
+
+.alert-success {
+    background-color: var(--alert-success-bg);
+    color: var(--alert-success-text);
+}
+
+.alert-danger {
+    background-color: var(--alert-danger-bg);
+    color: var(--alert-danger-text);
+}
+
+table {
+    color: var(--text-color);
+    border-color: var(--border-color);
+}
+
+table th {
+    background-color: var(--table-header-bg);
+}
+
+a {
+    color: var(--primary-color);
+}
+
+a:hover {
+    color: var(--primary-hover-color);
+}
+
+/* Estilos para el formulario de login y registro en modo oscuro */
+[data-theme="dark"] .card, [data-theme="dark"] .search-query {
+    background-color: var(--card-bg);
+}
+
+[data-theme="dark"] .form-control::placeholder {
+    color: #adb5bd;
+}
