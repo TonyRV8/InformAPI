@@ -89,33 +89,24 @@ La aplicación tiene dos tipos de roles:
 
 ## Capturas de pantalla
 Pagina de Login
-![image](https://github.com/user-attachments/assets/59c6d55c-af4d-4254-aa5b-dde49ae768a7)
-
-Registrando al usuario aimep3
-![image](https://github.com/user-attachments/assets/04611eb5-5aa4-4e22-87b8-24675d381194)
-
-Iniciando sesión
-![image](https://github.com/user-attachments/assets/fd294936-fbb8-4b78-ba93-a2bea44b1c7c)
-
-![image](https://github.com/user-attachments/assets/e8b6b75f-350e-4c3a-8f51-597d9d378387)
-
-Editando el nombre a aimep4
-![image](https://github.com/user-attachments/assets/82180f23-a419-40f8-bdf3-6c68bf1ce53d)
-![image](https://github.com/user-attachments/assets/bf505b5c-7d39-4bf3-a11a-0347e18baf55)
-
-Pantalla de Administrador
-![image](https://github.com/user-attachments/assets/e61e58cb-2ee2-4760-b886-087b5b7fa286)
-
-Lista de usuarios
-![image](https://github.com/user-attachments/assets/3969874e-dbd4-4c90-a9f3-2721001c8bba)
-
-Editando aimep4 a aimep3
-![image](https://github.com/user-attachments/assets/c2215b2c-ff36-4607-9ba7-ea6375432920)
-![image](https://github.com/user-attachments/assets/81925aa5-1780-42f6-b638-bc097322bdee)
-
-Eliminado aimep3
-![image](https://github.com/user-attachments/assets/cfe999cf-3d14-4bf3-b6ba-bc2654c67bc2)
-![image](https://github.com/user-attachments/assets/79555713-da09-42dd-af1e-af62ed09f80d)
+![image](https://github.com/user-attachments/assets/b112a509-3574-49af-b2ce-e572066628fa)
+Entrando como administrador
+![image](https://github.com/user-attachments/assets/94c6988a-c309-4c6c-842c-7f82a2c3e288)
+Gestión de Usuarios como Administrador
+![image](https://github.com/user-attachments/assets/7ddfdc1a-33c1-4b4c-9bbd-245774e5ddfe)
+Entrando como usuario normal
+![image](https://github.com/user-attachments/assets/7d0014e8-485b-4132-846b-ea38a6e1e79d)
+Modo oscuro en editar perfil
+![image](https://github.com/user-attachments/assets/8c94733e-6d9d-4303-83d3-81014b17c095)
+Página de inicio en modo oscuro
+![image](https://github.com/user-attachments/assets/aca0775b-741d-4abe-9273-ca4842ef484f)
+Módulo de Búsqueda de artículos
+![image](https://github.com/user-attachments/assets/bdc627b9-fd18-4bb0-a980-2daa350cd621)
+Resultados de búsqueda (en este caso machine learning)
+![image](https://github.com/user-attachments/assets/2a5f0221-e45c-4dae-a063-d3a3213d07e9)
+![image](https://github.com/user-attachments/assets/d624ba10-0711-4518-b46f-cb982619607d)
+Opciones de Búsqueda Avanzada
+![image](https://github.com/user-attachments/assets/94c4087a-7dd8-4d5b-ad41-3bb3840a62f5)
 
 Imagenes en docker
 ![image](https://github.com/user-attachments/assets/be17b799-a58b-4e0a-b472-b0530f1db5c7)
