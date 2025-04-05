@@ -89,24 +89,24 @@ La aplicación tiene dos tipos de roles:
 
 ## Capturas de pantalla
 Pagina de Login
-![image](https://github.com/user-attachments/assets/b112a509-3574-49af-b2ce-e572066628fa)
+![image](https://github.com/user-attachments/assets/9e14a481-2511-4d3c-a95d-f560934c2aeb)
 Entrando como administrador
-![image](https://github.com/user-attachments/assets/94c6988a-c309-4c6c-842c-7f82a2c3e288)
+![image](https://github.com/user-attachments/assets/91dba105-1539-498c-9201-e218fb988eee)
 Gestión de Usuarios como Administrador
-![image](https://github.com/user-attachments/assets/7ddfdc1a-33c1-4b4c-9bbd-245774e5ddfe)
+![image](https://github.com/user-attachments/assets/4d07d49a-2d2b-4794-9ed8-1f0e87f0ffd7)
 Entrando como usuario normal
-![image](https://github.com/user-attachments/assets/7d0014e8-485b-4132-846b-ea38a6e1e79d)
+![image](https://github.com/user-attachments/assets/42d468c4-064f-45e7-87b0-8c2a89b89cde)
 Modo oscuro en editar perfil
-![image](https://github.com/user-attachments/assets/8c94733e-6d9d-4303-83d3-81014b17c095)
+![image](https://github.com/user-attachments/assets/b78affab-d493-405e-9501-950fdedbe646)
 Página de inicio en modo oscuro
-![image](https://github.com/user-attachments/assets/aca0775b-741d-4abe-9273-ca4842ef484f)
+![image](https://github.com/user-attachments/assets/4e852a1f-e4d5-4e32-a436-960bfacc9fbe)
 Módulo de Búsqueda de artículos
-![image](https://github.com/user-attachments/assets/bdc627b9-fd18-4bb0-a980-2daa350cd621)
+![image](https://github.com/user-attachments/assets/763991b2-d3b3-4abc-a0f5-c782dbaaeedd)
 Resultados de búsqueda (en este caso machine learning)
-![image](https://github.com/user-attachments/assets/2a5f0221-e45c-4dae-a063-d3a3213d07e9)
-![image](https://github.com/user-attachments/assets/d624ba10-0711-4518-b46f-cb982619607d)
+![image](https://github.com/user-attachments/assets/5cd2927a-0e3a-4db3-ac5c-cbad2ebb3f16)
+![image](https://github.com/user-attachments/assets/064e6b2e-7c80-4472-93e4-d5ca1a0fa054)
 Opciones de Búsqueda Avanzada
-![image](https://github.com/user-attachments/assets/94c4087a-7dd8-4d5b-ad41-3bb3840a62f5)
+![image](https://github.com/user-attachments/assets/46849787-93af-422f-9cec-fce4cf4c996f)
 
 Imagenes en docker
 ![image](https://github.com/user-attachments/assets/be17b799-a58b-4e0a-b472-b0530f1db5c7)
