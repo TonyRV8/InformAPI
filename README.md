@@ -109,10 +109,10 @@ Opciones de Búsqueda Avanzada
 ![image](https://github.com/user-attachments/assets/46849787-93af-422f-9cec-fce4cf4c996f)
 
 Imagenes en docker
-![image](https://github.com/user-attachments/assets/be17b799-a58b-4e0a-b472-b0530f1db5c7)
+![image](https://github.com/user-attachments/assets/f8a7ad96-2286-48f3-97a4-d524662b0035)
 
 Contenedor de docker
-![image](https://github.com/user-attachments/assets/ce9cabee-8e11-4dd3-8fec-31406acb73b5)
+![image](https://github.com/user-attachments/assets/8bef88a5-5ba3-4560-9b3b-7ed32c09fb18)
 
 Se asegura la conexión en la base de datos usando docker
 ![image](https://github.com/user-attachments/assets/e9bdfc09-c8ff-406e-ae66-1f1bb0de8f6d)
