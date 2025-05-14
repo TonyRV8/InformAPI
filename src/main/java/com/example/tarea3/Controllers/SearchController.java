@@ -68,15 +68,16 @@ public class SearchController {
      * Procesa la búsqueda avanzada
      */
     @GetMapping("/advanced/results")
-    public String searchAdvanced(
-            @RequestParam(value = "query", required = false) String query,
-            @RequestParam(value = "page", defaultValue = "1") int page,
-            @RequestParam(value = "size", defaultValue = "10") int size,
-            @RequestParam(value = "sortField", required = false) String sortField,
-            @RequestParam(value = "sortDirection", required = false) String sortDirection,
-            @RequestParam(value = "dateRange", required = false) String dateRange,
-            Model model) {
-        
+public String searchAdvanced(
+        @RequestParam(value = "query", required = false) String query,
+        @RequestParam(value = "page", defaultValue = "1") int page,
+        @RequestParam(value = "size", defaultValue = "10") int size,
+        @RequestParam(value = "sortField", required = false) String sortField,
+        @RequestParam(value = "sortDirection", required = false) String sortDirection,
+        @RequestParam(value = "dateRange", required = false) String dateRange,
+        Model model) {
+    
+    try {
         if (query == null || query.isEmpty()) {
             return "search_advanced";
         }
@@ -90,10 +91,16 @@ public class SearchController {
         model.addAttribute("query", query);
         model.addAttribute("currentPage", page);
         model.addAttribute("pageSize", size);
-        model.addAttribute("sortField", sortField);
-        model.addAttribute("sortDirection", sortDirection);
-        model.addAttribute("dateRange", dateRange);
+        model.addAttribute("sortField", sortField != null ? sortField : "");
+        model.addAttribute("sortDirection", sortDirection != null ? sortDirection : "");
+        model.addAttribute("dateRange", dateRange != null ? dateRange : "");
         
         return "search_results";
+    } catch (Exception e) {
+        e.printStackTrace();
+        // En caso de error, redirigir a la página de búsqueda avanzada con un mensaje de error
+        model.addAttribute("errorMessage", "Ha ocurrido un error al procesar la búsqueda: " + e.getMessage());
+        return "search_advanced";
+    }
     }
 }
