@@ -41,8 +41,8 @@ Solo necesitas tener instalado:
 1. Clonar el repositorio:
 
 ```bash
-git clone https://github.com/tu-usuario/tarea3.git
-cd tarea3
+git clone https://github.com/TonyRV8/InformAPI
+cd InformAPI
 ```
 
 2. Iniciar la aplicación con Docker Compose:
