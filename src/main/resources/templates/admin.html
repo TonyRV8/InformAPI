@@ -92,6 +92,17 @@
             border-color: #138496;
         }
         
+        .btn-warning {
+            background-color: #ffc107;
+            border-color: #ffc107;
+            color: #000;
+        }
+        
+        .btn-warning:hover {
+            background-color: #e0a800;
+            border-color: #d39e00;
+        }
+        
         .btn-secondary {
             background-color: var(--secondary-color);
             border-color: var(--secondary-color);
@@ -173,6 +184,12 @@
                     <a class="nav-link" href="/search">Búsqueda</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="/favoritos">Favoritos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/recomendaciones">Recomendaciones</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="/perfil/editar">Mi Perfil</a>
                 </li>
                 <li class="nav-item">
@@ -197,6 +214,16 @@
         <!-- Búsqueda de artículos -->
         <a href="/search" class="btn btn-info btn-custom">
             <i class="fas fa-search feature-icon"></i>Buscar Artículos Científicos
+        </a>
+        
+        <!-- Favoritos -->
+        <a href="/favoritos" class="btn btn-warning btn-custom">
+            <i class="fas fa-star feature-icon"></i>Mis Artículos Favoritos
+        </a>
+        
+        <!-- Recomendaciones -->
+        <a href="/recomendaciones" class="btn btn-info btn-custom">
+            <i class="fas fa-magic feature-icon"></i>Recomendaciones Personalizadas
         </a>
         
         <!-- Editar perfil -->

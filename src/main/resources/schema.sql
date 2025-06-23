@@ -24,6 +24,25 @@ CREATE TABLE IF NOT EXISTS usuarios_roles (
     FOREIGN KEY (rol_id) REFERENCES roles(id) ON DELETE CASCADE
 );
 
+-- Crear la tabla de favoritos
+CREATE TABLE IF NOT EXISTS favoritos (
+    id BIGSERIAL PRIMARY KEY,
+    usuario_id BIGINT NOT NULL,
+    article_id VARCHAR(255) NOT NULL,
+    title TEXT NOT NULL,
+    authors TEXT,
+    publication_name TEXT,
+    publication_date VARCHAR(50),
+    doi VARCHAR(255),
+    url TEXT,
+    abstract TEXT,
+    cited_by_count INTEGER DEFAULT 0,
+    open_access VARCHAR(10),
+    fecha_agregado TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE,
+    UNIQUE(usuario_id, article_id)
+);
+
 -- Insertar roles en la tabla roles (solo si no existen ya)
 INSERT INTO roles (nombre)
 SELECT 'ROLE_ADMIN' 

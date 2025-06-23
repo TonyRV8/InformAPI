@@ -46,8 +46,16 @@ public class SecurityConfig {
                         // Rutas protegidas por rol
                         .requestMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
                         .requestMatchers("/api/usuarios").hasAuthority("ROLE_ADMIN")
+                        
+                        // APIs de favoritos y recomendaciones (requieren autenticación)
+                        .requestMatchers("/api/favoritos/**").authenticated()
+                        .requestMatchers("/api/recomendaciones/**").authenticated()
+                        
+                        // Rutas de usuario autenticado
                         .requestMatchers("/perfil/**").authenticated()
                         .requestMatchers("/search/**").authenticated()
+                        .requestMatchers("/favoritos/**").authenticated()
+                        .requestMatchers("/recomendaciones/**").authenticated()
                         
                         // Resto de rutas requieren autenticación
                         .anyRequest().authenticated()
